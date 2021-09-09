@@ -14,7 +14,7 @@ public class video_stand : UnityEngine.MonoBehaviour
     void Start()
     {
         vidPlayer.clip = videoClip;
-        vidPlayer.Play();
+        //vidPlayer.Play();
     }
 
 }
