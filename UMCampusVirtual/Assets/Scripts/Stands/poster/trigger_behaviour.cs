@@ -16,7 +16,7 @@ public class trigger_behaviour : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("PlayerArmature");
+        player = GameObject.Find("Player");
     }
 
     private void Update()
