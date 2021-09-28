@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using StarterAssets;
 
 public class trigger_behaviour : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class trigger_behaviour : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.Find("shadow");
     }
 
     private void Update()
@@ -56,7 +55,8 @@ public class trigger_behaviour : MonoBehaviour
         text.SetActive(!value);
         image.enabled = value;
         button.SetActive(value);
-        player.GetComponent<ThirdPersonController>().enabled = !value;
+        player.GetComponent<MoveBehaviour>().runSpeed = value?0:0.7f;
+        player.GetComponentInChildren<ThirdPersonOrbitCamBasic>().enabled = !value;
         Cursor.lockState = value? CursorLockMode.None:CursorLockMode.Locked;
     }
 
