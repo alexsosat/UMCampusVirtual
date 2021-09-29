@@ -68,7 +68,8 @@ public class BasicBehaviour : MonoBehaviour
 
     private void Start()
     {
-        if (!view.IsMine)
+		Cursor.lockState =  CursorLockMode.Locked;
+		if (!view.IsMine)
         {
 			playerCameraObject.enabled = false;
         }

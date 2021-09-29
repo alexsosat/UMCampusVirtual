@@ -6,33 +6,28 @@ using UnityEngine.InputSystem;
 
 public class trigger_behaviour : MonoBehaviour
 {
-    public GameObject text;
-    public GameObject button;
-    public Image image;
+   
+    
     public bool isIn = false;
 
-    private GameObject player;
+    private Texture2D image_texture;
+
 
     private void Awake()
     {
-        player = GameObject.Find("shadow");
+        image_texture = gameObject.GetComponentInParent<poster_stand>().image;
     }
 
-    private void Update()
-    {
-     
-        if (isIn && Input.GetKeyDown(KeyCode.E))
-        {
-            showPoster(true);
-        }
-    }
+
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            showUI(true);
+            CanvasBehaviour actions = other.gameObject.GetComponent<CanvasBehaviour>();
+            actions.setImage(image_texture);
+            actions.showUI(true);
         }
     }
 
@@ -40,24 +35,12 @@ public class trigger_behaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            showUI(false);
+            CanvasBehaviour actions = other.gameObject.GetComponent<CanvasBehaviour>();
+            actions.showUI(false);
         }
     }
 
-    private void showUI(bool value)
-    {
-        isIn = value;
-        text.SetActive(value);
-    }
 
-    public void showPoster(bool value)
-    {
-        text.SetActive(!value);
-        image.enabled = value;
-        button.SetActive(value);
-        player.GetComponent<MoveBehaviour>().runSpeed = value?0:0.7f;
-        player.GetComponentInChildren<ThirdPersonOrbitCamBasic>().enabled = !value;
-        Cursor.lockState = value? CursorLockMode.None:CursorLockMode.Locked;
-    }
+
 
 }

@@ -7,11 +7,14 @@ public class trigger_video : MonoBehaviour
 {
     public VideoPlayer videoPlayer;
 
+    private int counter = 0;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            videoPlayer.Play();
+            counter++;
+            checkCounter();
         }
     }
 
@@ -19,7 +22,18 @@ public class trigger_video : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            videoPlayer.Pause();
+            counter--;
+            checkCounter();
+        }
+    }
+
+    void checkCounter() {
+        if (counter > 0)
+        {
+            videoPlayer.Play();
+        }
+        else {
+            videoPlayer.Stop();
         }
     }
 }
