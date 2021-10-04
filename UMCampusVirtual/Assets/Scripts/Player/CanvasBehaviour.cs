@@ -6,17 +6,17 @@ using Photon.Pun;
 
 public class CanvasBehaviour : MonoBehaviour
 {
-
-    [SerializeField] private GameObject canvas;
-    [SerializeField] private GameObject hintText;
-    [SerializeField] private GameObject image;
-    [SerializeField] private GameObject closeButton;
+    private GameObject canvas;
+    private GameObject hintText;
+    private GameObject image;
+    private GameObject closeButton;
 
     private Sprite mySprite;
     private Image image_renderer;
     private PhotonView view;
 
-    private bool canOpen = false;
+    [SerializeField] private bool canOpen = false;
+    [SerializeField] private bool imageOpen = false;
 
 
     private void Awake()
@@ -44,6 +44,7 @@ public class CanvasBehaviour : MonoBehaviour
 
     public void showPoster(bool value)
     {
+        imageOpen = value;
         hintText.SetActive(!value);
         image.SetActive(value);
         closeButton.SetActive(value);
@@ -57,9 +58,13 @@ public class CanvasBehaviour : MonoBehaviour
     {
         if (view.IsMine)
         {
-            if (canOpen && Input.GetKeyDown(KeyCode.E))
+            if (canOpen && !imageOpen && Input.GetKeyDown(KeyCode.E))
             {
                 showPoster(true);
+            }
+            else if (imageOpen && Input.GetKeyDown(KeyCode.E))
+            {
+                showPoster(false);
             }
         }
     }
