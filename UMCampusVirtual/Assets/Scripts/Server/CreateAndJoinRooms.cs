@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
-
+using Photon.Realtime;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    public TMP_InputField createInput;
-    public TMP_InputField joinInput;
 
-    public void CreateRoom()
+    public void JoinGame()
     {
-        PhotonNetwork.CreateRoom(createInput.text);
+        PhotonNetwork.JoinRoom("UM");
     }
 
-    public void JoinRoom()
+    public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        PhotonNetwork.JoinRoom(joinInput.text);
+        if (returnCode == 32758)
+        {
+            PhotonNetwork.CreateRoom("UM");
+        }
     }
+
 
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Playground 1");
     }
+
 }

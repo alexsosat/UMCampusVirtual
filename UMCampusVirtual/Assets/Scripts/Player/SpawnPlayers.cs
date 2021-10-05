@@ -5,13 +5,19 @@ using Photon.Pun;
 
 public class SpawnPlayers : MonoBehaviour
 {
-    public GameObject playerPrefab;
+    public GameObject[] playerOptions;
+    private SelectCharacter selectCharacter;
 
     public float minX,  maxX;
+
+    private void Awake()
+    {
+        selectCharacter = GetComponent<SelectCharacter>();
+    }
 
     private void Start()
     {
         Vector2 randomPosition = new Vector2(Random.Range(minX, maxX), 0);
-        PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+        PhotonNetwork.Instantiate(playerOptions[selectCharacter.getCharacter()].name, randomPosition, Quaternion.identity);
     }
 }
