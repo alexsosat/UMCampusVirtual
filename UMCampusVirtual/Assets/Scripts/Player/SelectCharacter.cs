@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SelectCharacter : MonoBehaviour
 {
-    public static int characterIndex = 0;
+    private static int _characterIndex = 0;
+    
+    private static string _userName;
 
     public void setCharacter(int index)
     {
-        characterIndex = index;
+        _characterIndex = index;
     }
 
     public int getCharacter()
     {
-        return characterIndex;
+        return _characterIndex;
     }
+
+    public void SetUserName(TMP_InputField userNameField)
+    {
+        _userName = userNameField.text;
+    }
+
+    public string GetUserName()
+    {
+        return _userName;
+    }
+
 }

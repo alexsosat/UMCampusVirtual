@@ -10,12 +10,12 @@ public class trigger_behaviour : MonoBehaviour
     
     public bool isIn = false;
 
-    private Texture2D image_texture;
+    private Texture2D _imageTexture;
 
 
     private void Awake()
     {
-        image_texture = gameObject.GetComponentInParent<poster_stand>().image;
+        _imageTexture = gameObject.GetComponentInParent<poster_stand>().image;
     }
 
 
@@ -26,8 +26,8 @@ public class trigger_behaviour : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CanvasBehaviour actions = other.gameObject.GetComponent<CanvasBehaviour>();
-            actions.setImage(image_texture);
-            actions.showUI(true);
+            actions.SetImage(_imageTexture);
+            actions.ShowUI(true);
         }
     }
 
@@ -36,7 +36,8 @@ public class trigger_behaviour : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CanvasBehaviour actions = other.gameObject.GetComponent<CanvasBehaviour>();
-            actions.showUI(false);
+            actions.ShowUI(false);
+            actions.ResetValues();
         }
     }
 
