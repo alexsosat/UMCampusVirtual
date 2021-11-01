@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using ExitGames.Client.Photon;
 using Photon.Chat;
 using Photon.Pun;
-using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 using TMPro;
 using WebSocketSharp;
@@ -15,14 +14,21 @@ public class ChatManager : MonoBehaviour, IChatClientListener
 
     private string _receiver = "";
 
+    public SelectCharacter playerSettings;
     public GameObject loginForm;
     public GameObject chatForm;
     public TextMeshProUGUI chatMessages;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         _chatClient = new ChatClient(this);
+        string username = playerSettings.GetUserName();
+        
+        print("Connecting...");
+        _chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.AppVersion,
+            new AuthenticationValues(username));
         
     }
 
