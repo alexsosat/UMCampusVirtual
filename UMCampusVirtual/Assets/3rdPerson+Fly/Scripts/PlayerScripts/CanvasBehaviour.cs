@@ -53,7 +53,7 @@ public class CanvasBehaviour : MonoBehaviour
         _image.SetActive(value);
         _closeButton.SetActive(value);
         _scaleScroll.SetActive(value);
-        //player.GetComponent<MoveBehaviour>().runSpeed = value?0:0.7f;
+        player.GetComponent<BasicBehaviour>().canWalk = !value;
         player.GetComponentInChildren<ThirdPersonOrbitCamBasic>().enabled = !value;
         Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
     }

@@ -31,8 +31,9 @@ public class BasicBehaviour : MonoBehaviour
 	private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
 	private Vector3 colExtents;                           // Collider extents for ground test. 
 	private PhotonView view;
-	
 
+	public bool canWalk = true;
+	
 	// Get current horizontal and vertical axes.
 	public float GetH { get { return h; } }
 	public float GetV { get { return v; } }
@@ -79,9 +80,19 @@ public class BasicBehaviour : MonoBehaviour
 	{
         if (view.IsMine)
         {
+	        
+	        
 			// Store the input axes.
-			h = Input.GetAxis("Horizontal");
-			v = Input.GetAxis("Vertical");
+			if (canWalk)
+			{
+				h = Input.GetAxis("Horizontal");
+				v = Input.GetAxis("Vertical");
+			}
+			else
+			{
+				h = 0;
+				v = 0;
+			}
 
 			// Set the input axes on the Animator Controller.
 			anim.SetFloat(hFloat, h, 0.1f, Time.deltaTime);

@@ -17,7 +17,6 @@ public class SpawnPlayers : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(selectCharacter.GetUserName());
         Vector2 randomPosition = new Vector2(Random.Range(minX, maxX), 0);
         PhotonNetwork.Instantiate(playerOptions[selectCharacter.getCharacter()].name, randomPosition, Quaternion.identity);
     }
