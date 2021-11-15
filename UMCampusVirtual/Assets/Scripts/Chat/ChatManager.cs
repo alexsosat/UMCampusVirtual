@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon;
@@ -5,7 +6,6 @@ using Photon.Chat;
 using Photon.Pun;
 using UnityEngine;
 using TMPro;
-using WebSocketSharp;
 
 public class ChatManager : MonoBehaviour, IChatClientListener
 {
@@ -41,14 +41,14 @@ public class ChatManager : MonoBehaviour, IChatClientListener
 
     public void GetReceiver(TMP_InputField receiver)
     {
-        _receiver = receiver.text.IsNullOrEmpty() ? "" : receiver.text;
+        _receiver = String.IsNullOrEmpty(receiver.text) ? "" : receiver.text;
     }
 
     public void SendMessage(TMP_InputField message)
     {
-        if (!message.text.IsNullOrEmpty())
+        if (!String.IsNullOrEmpty(message.text))
         {
-            if (_receiver.IsNullOrEmpty())
+            if (String.IsNullOrEmpty(_receiver))
             {
                 _chatClient.PublishMessage(_roomName, message.text);
             }

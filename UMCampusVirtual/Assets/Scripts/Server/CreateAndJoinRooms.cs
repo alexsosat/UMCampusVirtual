@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
-using WebSocketSharp;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
@@ -13,7 +13,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     
     public void JoinGame()
     {
-        if (!playerOptions.GetUserName().IsNullOrEmpty())
+        if (!String.IsNullOrEmpty(playerOptions.GetUserName()))
         {
             joinMessage.text = "Entrando al juego";
             PhotonNetwork.JoinRoom("UM");

@@ -26,8 +26,6 @@ public class image_drag : MonoBehaviour, IDragHandler
         _xCoefficient = (float)Mathf.Cos((canvasRotation * Mathf.PI)/180);
         _zCoefficient = (float)Mathf.Sin((canvasRotation * Mathf.PI)/180)*-1;
         
-        Debug.Log("X: " + _xCoefficient );
-        Debug.Log("Z: " + _zCoefficient );
     }
 
     #endregion
